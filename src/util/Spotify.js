@@ -1,5 +1,4 @@
-const clientID = "5bfce306e8fc47618c4f0f95eb16c8be";
-const redirectURI = "http://sepehr.surge.sh/";
+const clientID = "f8142eeb58284547a5ecb45c86c674a3";
 let accessToken;
 
 export const Spotify = {
@@ -18,12 +17,14 @@ export const Spotify = {
 
       return accessToken;
     } else {
+      const redirectURI = window.location.href;
       const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`;
       window.location = accessUrl;
     }
   },
   search(term) {
     const accessToken = Spotify.getAccessToken();
+    console.log(accessToken)
     const endpoint = `https://api.spotify.com/v1/search?q=${term}&type=track`;
 
     return fetch(endpoint, {
@@ -41,17 +42,17 @@ export const Spotify = {
           console.log(networkError.message);*/
       })
       .then((jsonResponse) => {
-        // console.log(jsonResponse);
+        console.log(jsonResponse);
         if (!jsonResponse.tracks) {
           return [];
-        }
+        }else{
         return jsonResponse.tracks.items.map((track) => ({
           id: track.id,
           name: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
           uri: track.uri,
-        }));
+        }));}
       });
   },
   savePlaylist(playlistName, URIs) {
