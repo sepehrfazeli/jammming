@@ -67,6 +67,12 @@ export class App extends React.Component {
         <h1>
           Ja<span className="highlight">mmm</span>ing
         </h1>
+        <div id="hint">
+          <button id="closePoint" onClick={x => {console.log('sss');document.getElementById('hint').style.display = "none";}}>x</button>
+          <h6>Account Credentials:<br></br><span>(For Full Funtionality)</span></h6>
+          <h6>user:sepehr01@hi2.in</h6>
+          <h6>pass:bahman1374</h6>
+        </div>
         <div className="App">
           <SearchBar onSearch={this.search} />
           <div className="App-playlist">
